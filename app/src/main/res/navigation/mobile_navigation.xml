@@ -5,47 +5,72 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="io.github.sonphan12.myplayground.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/actionFromHomeToHomeChild"
-            app:destination="@id/navigation_home_child"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+    <navigation android:id="@+id/navigation_home"
+        app:startDestination="@id/fragment_home">
+        <fragment
+            android:id="@+id/fragment_home"
+            android:name="io.github.sonphan12.myplayground.ui.home.HomeFragment"
+            android:label="@string/title_home"
+            tools:layout="@layout/fragment_home">
+            <action
+                android:id="@+id/actionFromHomeToHomeChild"
+                app:destination="@id/fragment_home_child"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+        </fragment>
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="io.github.sonphan12.myplayground.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        <fragment
+            android:id="@+id/fragment_home_child"
+            android:name="io.github.sonphan12.myplayground.ui.home.HomeChildFragment"
+            tools:layout="@layout/fragment_home_child">
+            <action
+                android:id="@+id/actionFromHomeToHomeChild2"
+                app:destination="@id/navigation_home_child2"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+        </fragment>
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="io.github.sonphan12.myplayground.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        <fragment
+            android:id="@+id/navigation_home_child2"
+            android:name="io.github.sonphan12.myplayground.ui.home.HomeChild2Fragment"
+            tools:layout="@layout/fragment_home_child2" />
 
-    <fragment
-        android:id="@+id/navigation_home_child"
-        android:name="io.github.sonphan12.myplayground.ui.home.HomeChildFragment"
-        tools:layout="@layout/fragment_home_child">
-        <action
-            android:id="@+id/actionFromHomeToHomeChild2"
-            app:destination="@id/navigation_home_child2"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+    </navigation>
 
-    <fragment
-        android:id="@+id/navigation_home_child2"
-        android:name="io.github.sonphan12.myplayground.ui.home.HomeChild2Fragment"
-        tools:layout="@layout/fragment_home_child2" />
+    <navigation android:id="@+id/navigation_dashboard"
+        app:startDestination="@id/fragment_dashboard">
+        <fragment
+            android:id="@+id/fragment_dashboard"
+            android:name="io.github.sonphan12.myplayground.ui.dashboard.DashboardFragment"
+            android:label="@string/title_dashboard"
+            tools:layout="@layout/fragment_dashboard" >
+            <action
+                android:id="@+id/actionFromDashboardToDashboardChild"
+                app:destination="@id/fragment_dashboard_child"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+        </fragment>
+
+        <fragment
+            android:id="@+id/fragment_dashboard_child"
+            android:name="io.github.sonphan12.myplayground.ui.dashboard.DashboardChildFragment"
+            android:label="Dashboard Child"
+            tools:layout="@layout/fragment_dash_board_child" />
+    </navigation>
+
+    <navigation android:id="@+id/navigation_notifications"
+        app:startDestination="@id/fragment_notification">
+        <fragment
+            android:id="@+id/fragment_notification"
+            android:name="io.github.sonphan12.myplayground.ui.notifications.NotificationsFragment"
+            android:label="@string/title_notifications"
+            tools:layout="@layout/fragment_notifications" />
+    </navigation>
+
 </navigation>

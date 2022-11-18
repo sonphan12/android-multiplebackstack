@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.github.sonphan12.myplayground.databinding.FragmentNotificationsBinding
+import io.github.sonphan12.myplayground.ui.MyBaseFragment
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : MyBaseFragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 

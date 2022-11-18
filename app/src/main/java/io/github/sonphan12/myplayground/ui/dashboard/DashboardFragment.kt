@@ -1,6 +1,7 @@
 package io.github.sonphan12.myplayground.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import io.github.sonphan12.myplayground.MainActivity
 import io.github.sonphan12.myplayground.R
 import io.github.sonphan12.myplayground.databinding.FragmentDashboardBinding
+import io.github.sonphan12.myplayground.ui.MyBaseFragment
 import io.github.sonphan12.myplayground.ui.home.HomeChildFragment
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : MyBaseFragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -39,19 +43,38 @@ class DashboardFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnToDashboardChild.setOnClickListener {
-            requireActivity().supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                setCustomAnimations(
-                    R.anim.slide_in_right,
-                    R.anim.slide_out_left,
-                    R.anim.slide_in_left,
-                    R.anim.slide_out_right
-                )
-                val frag = DashboardChildFragment()
-                replace(R.id.nav_host_fragment_activity_main, frag)
-                addToBackStack(null)
-            }
+//            onBtnToDashboardChildClickJetPackNav()
+//            onBtnToDashboardChildClick()
+            (requireActivity() as MainActivity).navigator.openFragmentInCurrentTab(
+                DashboardChildFragment(),
+                "chiadasd",
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+        }
+    }
+
+    private fun onBtnToDashboardChildClickJetPackNav() {
+        findNavController().navigate(R.id.actionFromDashboardToDashboardChild)
+    }
+
+    private fun onBtnToDashboardChildClick() {
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            val frag = DashboardChildFragment()
+            replace(R.id.nav_host_fragment_activity_main_custom, frag)
+//            Log.d("SONNE", "addToBackStack: null")
+            addToBackStack(null)
         }
     }
 

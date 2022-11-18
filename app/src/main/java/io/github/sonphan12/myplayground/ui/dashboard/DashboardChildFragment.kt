@@ -11,8 +11,9 @@ import io.github.sonphan12.myplayground.R
 import io.github.sonphan12.myplayground.databinding.FragmentDashBoardChildBinding
 import io.github.sonphan12.myplayground.databinding.FragmentHomeBinding
 import io.github.sonphan12.myplayground.databinding.FragmentHomeChildBinding
+import io.github.sonphan12.myplayground.ui.MyBaseFragment
 
-class DashboardChildFragment : Fragment() {
+class DashboardChildFragment : MyBaseFragment() {
 
     private var _binding: FragmentDashBoardChildBinding? = null
 
@@ -28,7 +29,7 @@ class DashboardChildFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

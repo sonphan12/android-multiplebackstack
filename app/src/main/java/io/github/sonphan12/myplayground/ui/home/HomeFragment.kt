@@ -1,6 +1,7 @@
 package io.github.sonphan12.myplayground.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,9 @@ import androidx.navigation.fragment.findNavController
 import io.github.sonphan12.myplayground.MainActivity
 import io.github.sonphan12.myplayground.R
 import io.github.sonphan12.myplayground.databinding.FragmentHomeBinding
+import io.github.sonphan12.myplayground.ui.MyBaseFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : MyBaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -40,19 +42,41 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnToHomeChild.setOnClickListener {
-            requireActivity().supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                setCustomAnimations(
-                    R.anim.slide_in_right,
-                    R.anim.slide_out_left,
-                    R.anim.slide_in_left,
-                    R.anim.slide_out_right
-                )
-                val frag = HomeChildFragment()
-                replace(R.id.nav_host_fragment_activity_main, frag)
-                addToBackStack("home")
-            }
+//            onBtnHomeChildClick()
+//            onBtnHomeChildClickJetpackNav()
+
+            (requireActivity() as MainActivity).navigator.openFragmentInCurrentTab(HomeChildFragment(), "homechild",
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right)
+//                true,
+//                R.anim.slide_in_right,
+//                R.anim.slide_out_left,
+//                R.anim.slide_in_left,
+//                R.anim.slide_out_right)
+        }
+    }
+
+    private fun onBtnHomeChildClickJetpackNav() {
+        findNavController().navigate(R.id.actionFromHomeToHomeChild)
+    }
+
+    private fun onBtnHomeChildClick() {
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            val frag = HomeChildFragment()
+            replace(R.id.nav_host_fragment_activity_main_custom, frag)
+//            Log.d("SONNE", "addToBackStack: home")
+            addToBackStack("home")
         }
     }
 
